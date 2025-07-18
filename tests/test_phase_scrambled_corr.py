@@ -6,7 +6,6 @@ from phase_scrambled_corr import AR1_simulate
 def test_AR1_simulate_length_and_reproducibility():
     N = 250               # number of time points
     dt = 1.0              # time step = 1 month
-    fs = 1 / dt           # sampling frequency = 1 / 1 month
 
     rho = 0.9
     noise_std = 1.0
