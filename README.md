@@ -5,7 +5,7 @@ This module implements phase randomization surrogates and cross-correlation anal
 ## Installation
 
 ```bash
-$ pip install phase_scrambled_corr
+$ pip install https://github.com/anthony-meza/phase_scrambled_corr.git
 ```
 
 ## Usage
