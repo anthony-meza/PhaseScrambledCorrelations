@@ -1,5 +1,5 @@
 """
-phase_scrambled_correlations.py: Phase-scrambled Monte Carlo correlation analysis
+phase_scrambled_corr.py: Phase-scrambled Monte Carlo correlation analysis
 
 This module implements Monte Carlo phase scrambling for correlation and cross-correlation
 analysis following Ebisuzaki (1997).
@@ -8,10 +8,11 @@ analysis following Ebisuzaki (1997).
 - Ebisuzaki, W. (1997). A Method to Estimate the Statistical Significance of a
   Correlation When the Data Are Serially Correlated. *Journal of Climate*, 10(9), 2147–2153.
 """
+
 import numpy as np
 from numpy.fft import rfft, rfftfreq, irfft
 from scipy.stats import pearsonr
-
+from statsmodels.distributions.empirical_distribution import ECDF
 
 def real_fft(signal, fs, remove_mean=True, periodogram=False):
     """
@@ -51,7 +52,7 @@ def real_fft(signal, fs, remove_mean=True, periodogram=False):
     return freqs, F
 
 
-def phase_scrambled(signal, fs):
+def phase_scrambled(signal, fs, remove_mean=True):
     """
     Generate a phase-randomized surrogate of a real-valued time series.
 
@@ -69,7 +70,7 @@ def phase_scrambled(signal, fs):
     """
     signal = np.asarray(signal)
     nt = signal.size
-    freqs, F = real_fft(signal, fs)
+    freqs, F = real_fft(signal, fs, remove_mean=remove_mean)
     nf = freqs.size
 
     # generate random phases
@@ -117,6 +118,8 @@ def cross_correlation(x, y, dt=1.0, maxlags=None):
     lags = np.arange(-maxlags, maxlags+1) * dt
     ccf = np.zeros(len(lags))
 
+    pvals = np.zeros(len(lags))
+
     for i, k in enumerate(range(-maxlags, maxlags+1)):
         if k < 0:
             xi = x[:n+k]
@@ -125,8 +128,9 @@ def cross_correlation(x, y, dt=1.0, maxlags=None):
             xi = x[k:]
             yi = y[:n-k]
         ccf[i] = pearsonr(xi, yi)[0]
-    return lags, ccf
+        pvals[i] = pearsonr(xi, yi)[1]
 
+    return lags, ccf, pvals
 
 def cross_correlation_maxima(x, y, dt=1.0, maxlags=None):
     """
@@ -139,7 +143,7 @@ def cross_correlation_maxima(x, y, dt=1.0, maxlags=None):
     ccf_max : float
         Maximum correlation coefficient.
     """
-    lags, ccf = cross_correlation(x, y, dt, maxlags)
+    lags, ccf, _ = cross_correlation(x, y, dt, maxlags)
     idx = np.argmax(ccf)
     return lags[idx], ccf[idx]
 
@@ -166,7 +170,7 @@ def shift_maximally_correlated(x, y, dt=1.0, maxlags=None):
     return xa, ya
 
 
-def bootstrap_corr(x, y, n_iter=1000, fs=1.0):
+def bootstrap_corr(x, y, n_iter=1000, fs=1.0, remove_mean = True):
     """
     Estimate null distribution of correlation via phase-randomized surrogates.
 
@@ -185,8 +189,71 @@ def bootstrap_corr(x, y, n_iter=1000, fs=1.0):
         Array of correlation coefficients from surrogate pairs.
     """
     corrs = np.empty(n_iter, dtype=float)
+    ref_corr = pearsonr(x, y)[0]
     for i in range(n_iter):
-        xs = phase_scrambled(x, fs)
-        ys = phase_scrambled(y, fs)
+        xs = phase_scrambled(x, fs, remove_mean = remove_mean)
+        ys = phase_scrambled(y, fs, remove_mean = remove_mean)
         corrs[i] = pearsonr(xs, ys)[0]
-    return corrs
+
+    ecdf = ECDF(corrs)
+    boot_p_value = 2 * (1 - ecdf(ref_corr))
+
+    return ref_corr, boot_p_value, corrs
+
+
+def bootstrapped_cross_correlation(x, y, dt=1.0, maxlags=None, 
+                                   n_iter = 1000, return_distributions = False, remove_mean = True):
+    """
+    Compute cross-correlation function between two real sequences.
+
+    Parameters
+    ----------
+    x, y : array_like
+        Input time series (same length).
+    dt : float, default 1.0
+        Time step between samples.
+    maxlags : int, optional
+        Maximum lag (in number of samples). Defaults to length-1.
+
+    Returns
+    -------
+    lags : ndarray
+        Array of lag times.
+    ccf : ndarray
+        Cross-correlation coefficients at each lag.
+    """
+    x = np.asarray(x)
+    y = np.asarray(y)
+    n = x.size
+    if y.size != n:
+        raise ValueError("Input vectors must have the same length")
+
+    if maxlags is None:
+        maxlags = n - 1
+    maxlags = min(maxlags, n - 1)
+
+
+    fs = 1 / dt
+    lags = np.arange(-maxlags, maxlags+1) * dt
+    ccf = np.zeros(len(lags))
+    ccf_pval = np.zeros(len(lags))
+    if return_distributions:
+        ccf_dist = np.zeros(n_iter, len(lags))
+
+    for i, k in enumerate(range(-maxlags, maxlags+1)):
+        if k < 0:
+            xi = x[:n+k]
+            yi = y[-k:]
+        else:
+            xi = x[k:]
+            yi = y[:n-k]
+
+        ref_corr, p_value, corrs = bootstrap_corr(xi, yi, n_iter=n_iter, fs=fs, remove_mean = remove_mean)
+        ccf[i] = ref_corr
+        ccf_pval[i] = p_value
+        if return_distributions:
+            ccf_dist[:, i] = corrs
+    if return_distributions:
+        return lags, ccf, ccf_pval, ccf_dist
+    else:
+        return lags, ccf, ccf_pval
