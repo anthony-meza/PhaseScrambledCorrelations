@@ -20,9 +20,9 @@ jobs:
       - name: Install poetry
         uses: snok/install-poetry@v1
 
-      - name: Install package
-        run: poetry install
-
+      - name: Install dependencies (including docs tools)
+        run: poetry install --no-interaction   # ← don’t skip dev-deps
+        
       - name: Test with pytest
         run: poetry run pytest tests/ --cov=phase_scrambled_corr --cov-report=xml
 
