@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "phase_scrambled_corr"
+version = "0.1.0"
+description = "This module implements phase randomization surrogates and cross-correlation analysis following Ebisuzaki (1997)."
+authors = ["Anthony Meza"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
