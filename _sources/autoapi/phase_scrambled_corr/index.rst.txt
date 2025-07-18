@@ -1,0 +1,177 @@
+phase_scrambled_corr
+====================
+
+.. py:module:: phase_scrambled_corr
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/phase_scrambled_corr/correlations/index
+   /autoapi/phase_scrambled_corr/example_time_series/index
+   /autoapi/phase_scrambled_corr/fft_utils/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   phase_scrambled_corr.__version__
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   phase_scrambled_corr.phase_scrambled
+   phase_scrambled_corr.cross_correlation
+   phase_scrambled_corr.cross_correlation_maxima
+   phase_scrambled_corr.shift_maximally_correlated
+   phase_scrambled_corr.bootstrap_corr
+   phase_scrambled_corr.bootstrapped_cross_correlation
+   phase_scrambled_corr.real_fft
+   phase_scrambled_corr.AR1_simulate
+   phase_scrambled_corr.real_fft
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+
+.. py:function:: phase_scrambled(signal, fs, remove_mean=True)
+
+   Generate a phase-randomized surrogate of a real-valued time series.
+
+   :param signal: Input time series.
+   :type signal: array_like
+   :param fs: Sampling frequency (Hz).
+   :type fs: float
+
+   :returns: **surrogate** -- Time series with same power spectrum but random phases.
+   :rtype: ndarray
+
+
+.. py:function:: cross_correlation(x, y, dt=1.0, maxlags=None)
+
+   Compute cross-correlation function between two real sequences.
+
+   :param x: Input time series (same length).
+   :type x: array_like
+   :param y: Input time series (same length).
+   :type y: array_like
+   :param dt: Time step between samples.
+   :type dt: float, default 1.0
+   :param maxlags: Maximum lag (in number of samples). Defaults to length-1.
+   :type maxlags: int, optional
+
+   :returns: * **lags** (*ndarray*) -- Array of lag times.
+             * **ccf** (*ndarray*) -- Cross-correlation coefficients at each lag.
+
+
+.. py:function:: cross_correlation_maxima(x, y, dt=1.0, maxlags=None)
+
+   Find the lag with maximum cross-correlation.
+
+   :returns: * **lag_max** (*float*) -- Lag time at maximum correlation.
+             * **ccf_max** (*float*) -- Maximum correlation coefficient.
+
+
+.. py:function:: shift_maximally_correlated(x, y, dt=1.0, maxlags=None)
+
+   Shift two series to align at their maximum correlation lag.
+
+   :returns: **x_aligned, y_aligned** -- Truncated arrays of equal length aligned at optimal lag.
+   :rtype: ndarray
+
+
+.. py:function:: bootstrap_corr(x, y, n_iter=1000, fs=1.0, remove_mean=True)
+
+   Estimate null distribution of correlation via phase-randomized surrogates.
+
+   :param x: Input time series.
+   :type x: array_like
+   :param y: Input time series.
+   :type y: array_like
+   :param n_iter: Number of surrogate pairs.
+   :type n_iter: int
+   :param fs: Sampling frequency for phase randomization.
+   :type fs: float
+
+   :returns: **corrs** -- Array of correlation coefficients from surrogate pairs.
+   :rtype: ndarray
+
+
+.. py:function:: bootstrapped_cross_correlation(x, y, dt=1.0, maxlags=None, n_iter=1000, return_distributions=False, remove_mean=True)
+
+   Compute cross-correlation function between two real sequences.
+
+   :param x: Input time series (same length).
+   :type x: array_like
+   :param y: Input time series (same length).
+   :type y: array_like
+   :param dt: Time step between samples.
+   :type dt: float, default 1.0
+   :param maxlags: Maximum lag (in number of samples). Defaults to length-1.
+   :type maxlags: int, optional
+
+   :returns: * **lags** (*ndarray*) -- Array of lag times.
+             * **ccf** (*ndarray*) -- Cross-correlation coefficients at each lag.
+
+
+.. py:function:: real_fft(signal, fs, remove_mean=True, periodogram=False)
+
+   Compute the real-valued FFT of a time series.
+
+   :param signal: Input time series data.
+   :type signal: array_like
+   :param fs: Sampling frequency (Hz).
+   :type fs: float
+   :param remove_mean: If True, subtract the mean before FFT.
+   :type remove_mean: bool, default True
+   :param periodogram: If True, return 1/freq and FFT magnitudes (excluding zero-frequency term).
+   :type periodogram: bool, default False
+
+   :returns: * **freqs** (*ndarray*) -- Array of frequency bins.
+             * **spectrum** (*ndarray*) -- FFT of the input signal (complex values) or magnitudes if periodogram.
+
+
+.. py:function:: AR1_simulate(rho, sigma, y0, N, seed=None)
+
+   Simulate ana AR(1) process: y[t] = rho*y[t-1] + eps[t]
+
+   :param rho: AR(1) coefficient.
+   :type rho: float
+   :param sigma: Standard deviation of Gaussian noise.
+   :type sigma: float
+   :param y0: Initial value.
+   :type y0: float
+   :param T: Length of time series.
+   :type T: int
+
+   :returns: **y** -- Simulated AR(1) series of length T.
+   :rtype: ndarray
+
+
+.. py:function:: real_fft(signal, fs, remove_mean=True, periodogram=False)
+
+   Compute the real-valued FFT of a time series.
+
+   :param signal: Input time series data.
+   :type signal: array_like
+   :param fs: Sampling frequency (Hz).
+   :type fs: float
+   :param remove_mean: If True, subtract the mean before FFT.
+   :type remove_mean: bool, default True
+   :param periodogram: If True, return 1/freq and FFT magnitudes (excluding zero-frequency term).
+   :type periodogram: bool, default False
+
+   :returns: * **freqs** (*ndarray*) -- Array of frequency bins.
+             * **spectrum** (*ndarray*) -- FFT of the input signal (complex values) or magnitudes if periodogram.
+
+

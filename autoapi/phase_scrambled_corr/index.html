@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>phase_scrambled_corr &mdash; phase_scrambled_corr  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="phase_scrambled_corr.correlations" href="correlations/index.html" />
+    <link rel="prev" title="API Reference" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            phase_scrambled_corr
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Example usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conduct.html">Code of Conduct</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">phase_scrambled_corr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="correlations/index.html">phase_scrambled_corr.correlations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="example_time_series/index.html">phase_scrambled_corr.example_time_series</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fft_utils/index.html">phase_scrambled_corr.fft_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#attributes">Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-contents">Package Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.__version__"><code class="docutils literal notranslate"><span class="pre">__version__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.phase_scrambled"><code class="docutils literal notranslate"><span class="pre">phase_scrambled()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.cross_correlation"><code class="docutils literal notranslate"><span class="pre">cross_correlation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.cross_correlation_maxima"><code class="docutils literal notranslate"><span class="pre">cross_correlation_maxima()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.shift_maximally_correlated"><code class="docutils literal notranslate"><span class="pre">shift_maximally_correlated()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.bootstrap_corr"><code class="docutils literal notranslate"><span class="pre">bootstrap_corr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.bootstrapped_cross_correlation"><code class="docutils literal notranslate"><span class="pre">bootstrapped_cross_correlation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.real_fft"><code class="docutils literal notranslate"><span class="pre">real_fft()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phase_scrambled_corr.AR1_simulate"><code class="docutils literal notranslate"><span class="pre">AR1_simulate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">real_fft()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">phase_scrambled_corr</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+      <li class="breadcrumb-item active">phase_scrambled_corr</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/autoapi/phase_scrambled_corr/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-phase_scrambled_corr">
+<span id="phase-scrambled-corr"></span><h1>phase_scrambled_corr<a class="headerlink" href="#module-phase_scrambled_corr" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="correlations/index.html">phase_scrambled_corr.correlations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_time_series/index.html">phase_scrambled_corr.example_time_series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fft_utils/index.html">phase_scrambled_corr.fft_utils</a></li>
+</ul>
+</div>
+</section>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#phase_scrambled_corr.__version__" title="phase_scrambled_corr.__version__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__version__</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#phase_scrambled_corr.phase_scrambled" title="phase_scrambled_corr.phase_scrambled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_scrambled</span></code></a>(signal, fs[, remove_mean])</p></td>
+<td><p>Generate a phase-randomized surrogate of a real-valued time series.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#phase_scrambled_corr.cross_correlation" title="phase_scrambled_corr.cross_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_correlation</span></code></a>(x, y[, dt, maxlags])</p></td>
+<td><p>Compute cross-correlation function between two real sequences.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#phase_scrambled_corr.cross_correlation_maxima" title="phase_scrambled_corr.cross_correlation_maxima"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cross_correlation_maxima</span></code></a>(x, y[, dt, maxlags])</p></td>
+<td><p>Find the lag with maximum cross-correlation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#phase_scrambled_corr.shift_maximally_correlated" title="phase_scrambled_corr.shift_maximally_correlated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shift_maximally_correlated</span></code></a>(x, y[, dt, maxlags])</p></td>
+<td><p>Shift two series to align at their maximum correlation lag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#phase_scrambled_corr.bootstrap_corr" title="phase_scrambled_corr.bootstrap_corr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bootstrap_corr</span></code></a>(x, y[, n_iter, fs, remove_mean])</p></td>
+<td><p>Estimate null distribution of correlation via phase-randomized surrogates.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#phase_scrambled_corr.bootstrapped_cross_correlation" title="phase_scrambled_corr.bootstrapped_cross_correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bootstrapped_cross_correlation</span></code></a>(x, y[, dt, maxlags, ...])</p></td>
+<td><p>Compute cross-correlation function between two real sequences.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="phase_scrambled_corr.real_fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_fft</span></code></a>(signal, fs[, remove_mean, periodogram])</p></td>
+<td><p>Compute the real-valued FFT of a time series.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#phase_scrambled_corr.AR1_simulate" title="phase_scrambled_corr.AR1_simulate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AR1_simulate</span></code></a>(rho, sigma, y0, N[, seed])</p></td>
+<td><p>Simulate ana AR(1) process: y[t] = rho*y[t-1] + eps[t]</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id0" title="phase_scrambled_corr.real_fft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_fft</span></code></a>(signal, fs[, remove_mean, periodogram])</p></td>
+<td><p>Compute the real-valued FFT of a time series.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="phase_scrambled_corr.__version__">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">__version__</span></span><a class="headerlink" href="#phase_scrambled_corr.__version__" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.phase_scrambled">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">phase_scrambled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#phase_scrambled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.phase_scrambled" title="Link to this definition"></a></dt>
+<dd><p>Generate a phase-randomized surrogate of a real-valued time series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array_like</em>) – Input time series.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling frequency (Hz).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>surrogate</strong> – Time series with same power spectrum but random phases.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.cross_correlation">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">cross_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#cross_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.cross_correlation" title="Link to this definition"></a></dt>
+<dd><p>Compute cross-correlation function between two real sequences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array_like</em>) – Input time series (same length).</p></li>
+<li><p><strong>y</strong> (<em>array_like</em>) – Input time series (same length).</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>default 1.0</em>) – Time step between samples.</p></li>
+<li><p><strong>maxlags</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum lag (in number of samples). Defaults to length-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lags</strong> (<em>ndarray</em>) – Array of lag times.</p></li>
+<li><p><strong>ccf</strong> (<em>ndarray</em>) – Cross-correlation coefficients at each lag.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.cross_correlation_maxima">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">cross_correlation_maxima</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#cross_correlation_maxima"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.cross_correlation_maxima" title="Link to this definition"></a></dt>
+<dd><p>Find the lag with maximum cross-correlation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>lag_max</strong> (<em>float</em>) – Lag time at maximum correlation.</p></li>
+<li><p><strong>ccf_max</strong> (<em>float</em>) – Maximum correlation coefficient.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.shift_maximally_correlated">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">shift_maximally_correlated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#shift_maximally_correlated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.shift_maximally_correlated" title="Link to this definition"></a></dt>
+<dd><p>Shift two series to align at their maximum correlation lag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x_aligned, y_aligned</strong> – Truncated arrays of equal length aligned at optimal lag.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.bootstrap_corr">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">bootstrap_corr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#bootstrap_corr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.bootstrap_corr" title="Link to this definition"></a></dt>
+<dd><p>Estimate null distribution of correlation via phase-randomized surrogates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array_like</em>) – Input time series.</p></li>
+<li><p><strong>y</strong> (<em>array_like</em>) – Input time series.</p></li>
+<li><p><strong>n_iter</strong> (<em>int</em>) – Number of surrogate pairs.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling frequency for phase randomization.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>corrs</strong> – Array of correlation coefficients from surrogate pairs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.bootstrapped_cross_correlation">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">bootstrapped_cross_correlation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_distributions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/correlations.html#bootstrapped_cross_correlation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.bootstrapped_cross_correlation" title="Link to this definition"></a></dt>
+<dd><p>Compute cross-correlation function between two real sequences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>array_like</em>) – Input time series (same length).</p></li>
+<li><p><strong>y</strong> (<em>array_like</em>) – Input time series (same length).</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>default 1.0</em>) – Time step between samples.</p></li>
+<li><p><strong>maxlags</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum lag (in number of samples). Defaults to length-1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lags</strong> (<em>ndarray</em>) – Array of lag times.</p></li>
+<li><p><strong>ccf</strong> (<em>ndarray</em>) – Cross-correlation coefficients at each lag.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.real_fft">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">real_fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodogram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/fft_utils.html#real_fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.real_fft" title="Link to this definition"></a></dt>
+<dd><p>Compute the real-valued FFT of a time series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array_like</em>) – Input time series data.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling frequency (Hz).</p></li>
+<li><p><strong>remove_mean</strong> (<em>bool</em><em>, </em><em>default True</em>) – If True, subtract the mean before FFT.</p></li>
+<li><p><strong>periodogram</strong> (<em>bool</em><em>, </em><em>default False</em>) – If True, return 1/freq and FFT magnitudes (excluding zero-frequency term).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>freqs</strong> (<em>ndarray</em>) – Array of frequency bins.</p></li>
+<li><p><strong>spectrum</strong> (<em>ndarray</em>) – FFT of the input signal (complex values) or magnitudes if periodogram.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phase_scrambled_corr.AR1_simulate">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">AR1_simulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/example_time_series.html#AR1_simulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phase_scrambled_corr.AR1_simulate" title="Link to this definition"></a></dt>
+<dd><p>Simulate ana AR(1) process: y[t] = rho*y[t-1] + eps[t]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>float</em>) – AR(1) coefficient.</p></li>
+<li><p><strong>sigma</strong> (<em>float</em>) – Standard deviation of Gaussian noise.</p></li>
+<li><p><strong>y0</strong> (<em>float</em>) – Initial value.</p></li>
+<li><p><strong>T</strong> (<em>int</em>) – Length of time series.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>y</strong> – Simulated AR(1) series of length T.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-prename descclassname"><span class="pre">phase_scrambled_corr.</span></span><span class="sig-name descname"><span class="pre">real_fft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_mean</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">periodogram</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/phase_scrambled_corr/fft_utils.html#real_fft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Compute the real-valued FFT of a time series.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> (<em>array_like</em>) – Input time series data.</p></li>
+<li><p><strong>fs</strong> (<em>float</em>) – Sampling frequency (Hz).</p></li>
+<li><p><strong>remove_mean</strong> (<em>bool</em><em>, </em><em>default True</em>) – If True, subtract the mean before FFT.</p></li>
+<li><p><strong>periodogram</strong> (<em>bool</em><em>, </em><em>default False</em>) – If True, return 1/freq and FFT magnitudes (excluding zero-frequency term).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>freqs</strong> (<em>ndarray</em>) – Array of frequency bins.</p></li>
+<li><p><strong>spectrum</strong> (<em>ndarray</em>) – FFT of the input signal (complex values) or magnitudes if periodogram.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="correlations/index.html" class="btn btn-neutral float-right" title="phase_scrambled_corr.correlations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Anthony Meza.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

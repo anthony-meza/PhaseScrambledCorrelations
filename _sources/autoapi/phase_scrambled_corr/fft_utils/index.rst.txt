@@ -1,0 +1,34 @@
+phase_scrambled_corr.fft_utils
+==============================
+
+.. py:module:: phase_scrambled_corr.fft_utils
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   phase_scrambled_corr.fft_utils.real_fft
+
+
+Module Contents
+---------------
+
+.. py:function:: real_fft(signal, fs, remove_mean=True, periodogram=False)
+
+   Compute the real-valued FFT of a time series.
+
+   :param signal: Input time series data.
+   :type signal: array_like
+   :param fs: Sampling frequency (Hz).
+   :type fs: float
+   :param remove_mean: If True, subtract the mean before FFT.
+   :type remove_mean: bool, default True
+   :param periodogram: If True, return 1/freq and FFT magnitudes (excluding zero-frequency term).
+   :type periodogram: bool, default False
+
+   :returns: * **freqs** (*ndarray*) -- Array of frequency bins.
+             * **spectrum** (*ndarray*) -- FFT of the input signal (complex values) or magnitudes if periodogram.
+
+
