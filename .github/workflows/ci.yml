@@ -22,6 +22,10 @@ jobs:
 
       - name: Install dependencies (including docs tools)
         run: poetry install --no-interaction   # ← don’t skip dev-deps
+
+      - name: Install extra docs deps
+        # use 'poetry run pip' so it installs into Poetry’s venv
+        run: poetry run pip install sphinx sphinx-autoapi sphinx-rtd-theme
         
       - name: Test with pytest
         run: poetry run pytest tests/ --cov=phase_scrambled_corr --cov-report=xml
