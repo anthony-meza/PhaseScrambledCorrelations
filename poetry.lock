@@ -62,6 +62,20 @@ tests = ["cloudpickle ; platform_python_implementation == \"CPython\"", "hypothe
 tests-mypy = ["mypy (>=1.11.1) ; platform_python_implementation == \"CPython\" and python_version >= \"3.10\"", "pytest-mypy-plugins ; platform_python_implementation == \"CPython\" and python_version >= \"3.10\""]
 
 [[package]]
+name = "autoapi"
+version = "2.0.1"
+description = "Automatic API reference documentation generation for Sphinx inspired by Doxygen"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "autoapi-2.0.1.tar.gz", hash = "sha256:4003b17599020652d0738dc1c426d0abf2f58f8a1821f5500816043210b3d1d6"},
+]
+
+[package.dependencies]
+sphinx = "*"
+
+[[package]]
 name = "babel"
 version = "2.17.0"
 description = "Internationalization utilities"
@@ -2886,4 +2900,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.13"
-content-hash = "8e9c0af964fb4b5cb9f8857db41b167633805dc5c1a171a3027839406a39de3e"
+content-hash = "7283beef882952290c9452cd9f4379d50ad67b6ab3d82724c7b59948256d176b"
