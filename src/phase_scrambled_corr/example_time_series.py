@@ -26,6 +26,6 @@ def AR1_simulate(rho, sigma, y0, N, seed=None):
     y = np.empty(N)
     eps = np.random.normal(0, sigma, N)
     y[0] = y0
-    for t in range(N):
+    for t in range(1, N):
         y[t] = rho * y[t-1] + eps[t]
     return range(N), y
