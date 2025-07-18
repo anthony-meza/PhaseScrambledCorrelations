@@ -2,12 +2,16 @@ name: ci
 
 on: [push, pull_request]
 
+# grant the GITHUB_TOKEN permission to push pages
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   ci:
     # Set up operating system
     runs-on: ubuntu-latest
 
-    # Define job steps
     steps:
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -16,17 +20,19 @@ jobs:
 
       - name: Check-out repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0            # get full history so gh-pages can detect changes
+          persist-credentials: true # allow pushes with GITHUB_TOKEN
 
       - name: Install poetry
         uses: snok/install-poetry@v1
 
       - name: Install dependencies (including docs tools)
-        run: poetry install --no-interaction   # ← don’t skip dev-deps
+        run: poetry install --no-interaction
 
       - name: Install extra docs deps
-        # use 'poetry run pip' so it installs into Poetry’s venv
         run: poetry run pip install sphinx sphinx-autoapi sphinx-rtd-theme
-        
+
       - name: Test with pytest
         run: poetry run pytest tests/ --cov=phase_scrambled_corr --cov-report=xml
 
@@ -34,7 +40,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage.xml   # coverage report
+          files: ./coverage.xml
 
       - name: Build documentation
         run: poetry run make html --directory docs/
@@ -43,5 +49,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/_build/html
           publish_branch: gh-pages
+          publish_dir: ./docs/_build/html
