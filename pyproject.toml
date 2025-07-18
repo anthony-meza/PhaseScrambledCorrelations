@@ -23,6 +23,7 @@ autoapi = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "^8.2.3"
+sphinx-autoapi = "^3.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
