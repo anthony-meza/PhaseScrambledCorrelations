@@ -1,7 +1,7 @@
 import numpy as np
+from phase_scrambled_corr.ar_processes import AR1_process
 import pytest
 
-from phase_scrambled_corr import AR1_simulate
 
 def test_AR1_simulate_length_and_reproducibility():
     N = 250               # number of time points
@@ -12,15 +12,15 @@ def test_AR1_simulate_length_and_reproducibility():
     y0 = 1
 
     # run twice with the same seed
-    t1, x1 = AR1_simulate(rho, noise_std, y0, N, seed=42)
-    t2, x2 = AR1_simulate(rho, noise_std, y0, N, seed=42)
+    ts1 = AR1_process(rho, noise_std, y0, N, seed=42, dt = dt)
+    ts2 = AR1_process(rho, noise_std, y0, N, seed=42, dt = dt)
 
     # 1) length checks
-    assert len(t1) == N
-    assert len(x1) == N
+    assert ts1.n == N
+    assert ts2.n == N
 
     # 2) time array starts at 0 and increments by dt
-    assert np.allclose(t1, np.arange(N) * dt)
+    assert np.allclose(ts1.time, np.arange(N) * dt)
 
     # 3) reproducibility: same seed ⇒ identical output
-    assert np.array_equal(x1, x2)
+    assert np.array_equal(ts1.data, ts2.data)

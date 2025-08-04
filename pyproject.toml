@@ -7,27 +7,34 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.12,<3.13"
+python = "^3.11"
 matplotlib = "^3.10.3"
 scipy = "^1.16.0"
 statsmodels = "^0.14.5"
 numpy = "^2.3.1"
 pandas = "^2.3.1"
 xarray = "^2025.7.1"
-pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
-sphinx = "^8.2.3"
 myst-nb = "^1.3.0"
 autoapi = "^2.0.1"
-
-
-[tool.poetry.group.dev.dependencies]
-sphinx = "^8.2.3"
-sphinx-autoapi = "^3.6.0"
-sphinx-rtd-theme = "^3.0.2"
-myst-nb = "^1.3.0"
-ghp-import = "^2.1.0"
+tqdm = "^4.67.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+# Poetry will check compatibility automatically when you run:
+#   poetry install
+# or
+#   poetry update
+
+# If there are version conflicts, Poetry will report them and refuse to install incompatible packages.
+# You can also run:
+#   poetry show --tree
+# to see the dependency tree and check for conflicts.
+
+# To actively develop this package in a Jupyter notebook, you can add development dependencies by running:
+# import sys
+# sys.path.append('./phase_scrambled_corr')
+# In pip, you can install the package in editable mode with:
+# pip install -e .
