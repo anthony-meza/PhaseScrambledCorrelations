@@ -43,7 +43,7 @@ jobs:
           files: ./coverage.xml
 
       - name: Build documentation
-        run: poetry run make html --directory docs/
+        run: cd docs/ && poetry run make html
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
