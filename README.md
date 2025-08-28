@@ -23,3 +23,7 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 ## Credits
 
 `phase_scrambled_corr` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+
+## References 
+
+Ebisuzaki, W. (1997). A method to estimate the statistical significance of a correlation when the data are serially correlated. Journal of Climate, 10(9), 2147–2153. https://doi.org/10.1175/1520-0442(1997)010&#60;2147:amtets&#62;2.0.co;2
