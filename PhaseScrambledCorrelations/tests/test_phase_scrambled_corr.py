@@ -1,5 +1,5 @@
 import numpy as np
-from phase_scrambled_corr.ar_processes import AR1_process
+from PhaseScrambledCorrelations.ar_processes import AR1_process
 import pytest
 
 

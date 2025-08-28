@@ -8,9 +8,31 @@ from numpy.fft import rfft, rfftfreq, irfft
 from .timeseries import TimeSeries
 
 def simple_detrend(time, signal):
-    # Detrending by subtracting the mean, don't worry about
-    # the linear trend fitting here. We're interested in
-    # all variability here.
+    """
+    Remove the mean from a signal for simple detrending.
+    
+    This is a minimal detrending approach that subtracts only the mean,
+    preserving all variability without fitting linear trends.
+    
+    Parameters
+    ----------
+    time : array-like
+        Time points (not used in calculation, kept for interface consistency).
+    signal : array-like
+        Input signal to detrend.
+        
+    Returns
+    -------
+    np.ndarray
+        Signal with mean removed.
+        
+    Notes
+    -----
+    This function only removes the DC component (mean) rather than 
+    fitting and removing linear trends. This preserves all temporal
+    variability in the signal which is often desired for spectral
+    analysis and phase scrambling applications.
+    """
     return signal - np.mean(signal)
 
 def real_fft(ts: TimeSeries, detrend=True, periodogram=False):

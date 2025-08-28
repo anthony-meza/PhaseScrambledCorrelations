@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=phase_scrambled_corr
+set SPHINXPROJ=PhaseScrambledCorrelations
 
 if "%1" == "" goto help
 

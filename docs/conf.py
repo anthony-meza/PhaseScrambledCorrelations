@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"phase_scrambled_corr"
+project = u"PhaseScrambledCorrelations"
 copyright = u"2025, Anthony Meza"
 author = u"Anthony Meza"
 
@@ -21,7 +21,7 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
-autoapi_dirs = ["../src"]
+autoapi_dirs = ["../PhaseScrambledCorrelations"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

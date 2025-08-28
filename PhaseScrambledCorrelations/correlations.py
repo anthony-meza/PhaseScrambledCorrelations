@@ -109,19 +109,47 @@ def cross_correlation_maxima(ts1: TimeSeries, ts2: TimeSeries, maxlags=None):
 
 def shift_maximally_correlated(ts1: TimeSeries, ts2: TimeSeries, maxlags=None):
     """
-    Align two time series at the lag of maximal correlation.
+    Align two time series at the lag of maximal cross-correlation.
+    
+    This function finds the lag at which the cross-correlation between
+    two time series is maximized and returns both series aligned at
+    that optimal lag, with overlapping time windows.
 
     Parameters
     ----------
     ts1, ts2 : TimeSeries
-        Input time series.
+        Input time series to align. Must have compatible time steps.
     maxlags : int, optional
-        Maximum lag to compute.
+        Maximum lag to consider when searching for optimal alignment.
+        If None, uses full range (N-1 where N is series length).
 
     Returns
     -------
-    ts1_shifted, ts2_shifted : TimeSeries
-        Shifted time series aligned at maximal correlation.
+    ts1_shifted, ts2_shifted : tuple of TimeSeries
+        Time series aligned at the lag of maximum correlation, with
+        matching time windows. Both series will have the same length
+        and time coordinates after alignment.
+        
+    Raises
+    ------
+    ValueError
+        If the time series have incompatible time steps or lengths.
+        
+    Notes
+    -----
+    The alignment process:
+    1. Computes cross-correlation for all lags within maxlags
+    2. Identifies the lag with maximum correlation
+    3. Trims both series to their overlapping time window at that lag
+    
+    This is useful for analyzing relationships between time series
+    that may be offset in time due to physical delays or measurement
+    timing differences.
+    
+    Examples
+    --------
+    >>> ts1_aligned, ts2_aligned = shift_maximally_correlated(ts1, ts2, maxlags=50)
+    >>> # Now ts1_aligned and ts2_aligned have maximum correlation at zero lag
     """
     lag_max, _ = cross_correlation_maxima(ts1, ts2, maxlags)
     dt = ts1.time[1] - ts1.time[0] if len(ts1.time) > 1 else 1.0
