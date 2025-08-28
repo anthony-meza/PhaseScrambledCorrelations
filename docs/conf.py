@@ -17,11 +17,11 @@ author = u"Anthony Meza"
 # ones.
 extensions = [
     "myst_nb",
-    "autoapi.extension",
+    # "autoapi.extension",  # Temporarily disabled due to compatibility issue
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
 ]
-autoapi_dirs = ["../PhaseScrambledCorrelations"]
+# autoapi_dirs = ["../PhaseScrambledCorrelations"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
