@@ -1,6 +1,8 @@
 # phase_scrambled_corr
 
-This module implements phase randomization surrogates and cross-correlation analysis following Ebisuzaki (1997).
+This module implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here to instantaneous and lagged correlations. 
+
+and cross-correlation analysis following.
 
 ## Installation
 
