@@ -1,6 +1,6 @@
 # phase_scrambled_corr
 
-This module implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations. 
+This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations. 
 
 ## Installation
 
