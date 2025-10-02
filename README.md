@@ -1,6 +1,6 @@
-# PhaseScrambledCorrelations
+# SpectralCorr
 
-This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations. 
+Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations. 
 
 ## Installation
 
@@ -18,11 +18,11 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## License
 
-`PhaseScrambledCorrelations` was created by Anthony Meza. It is licensed under the terms of the MIT license.
+`SpectralCorr` was created by Anthony Meza. It is licensed under the terms of the MIT license.
 
 ## Credits
 
-`PhaseScrambledCorrelations` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`SpectralCorr` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
 
 ## References 
 

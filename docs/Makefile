@@ -3,7 +3,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = PhaseScrambledCorrelations
+SPHINXPROJ    = SpectralCorr
 SOURCEDIR     = .
 BUILDDIR      = _build
 

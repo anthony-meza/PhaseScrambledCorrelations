@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"PhaseScrambledCorrelations"
+project = u"SpectralCorr"
 copyright = u"2025, Anthony Meza"
 author = u"Anthony Meza"
 

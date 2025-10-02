@@ -34,7 +34,7 @@ jobs:
         run: poetry run pip install sphinx sphinx-autoapi sphinx-rtd-theme
 
       - name: Test with pytest
-        run: poetry run pytest PhaseScrambledCorrelations/tests/ --cov=PhaseScrambledCorrelations --cov-report=xml
+        run: poetry run pytest SpectralCorr/tests/ --cov=SpectralCorr --cov-report=xml
 
       - name: Use Codecov to track coverage
         uses: codecov/codecov-action@v5

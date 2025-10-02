@@ -4,7 +4,7 @@ Tests for AR process generation functions.
 
 import numpy as np
 import pytest
-from PhaseScrambledCorrelations.ar_processes import AR1_process
+from SpectralCorr.ar_processes import AR1_process
 
 
 class TestAR1Process:
@@ -18,8 +18,8 @@ class TestAR1Process:
         y0 = 0.5
         dt = 1.0
         
-        ts = AR1_process(rho, sigma, y0, N, seed=42, dt=dt)
-        
+        ts = AR1_process(rho, sigma, y0, N, seed=42, dt=dt, return_xarray=False)
+
         assert ts.n == N
         assert ts.dt == dt
         assert len(ts.data) == N
@@ -31,8 +31,8 @@ class TestAR1Process:
         """Test that same seed produces identical results."""
         params = {'rho': 0.9, 'sigma': 1.5, 'y0': 1.0, 'N': 50, 'dt': 0.5}
         
-        ts1 = AR1_process(**params, seed=123)
-        ts2 = AR1_process(**params, seed=123)
+        ts1 = AR1_process(**params, seed=123, return_xarray=False)
+        ts2 = AR1_process(**params, seed=123, return_xarray=False)
         
         assert np.array_equal(ts1.data, ts2.data)
         assert np.array_equal(ts1.time, ts2.time)
@@ -41,8 +41,8 @@ class TestAR1Process:
         """Test that different seeds produce different results."""
         params = {'rho': 0.7, 'sigma': 1.0, 'y0': 0.0, 'N': 100, 'dt': 1.0}
         
-        ts1 = AR1_process(**params, seed=1)
-        ts2 = AR1_process(**params, seed=2)
+        ts1 = AR1_process(**params, seed=1, return_xarray=False)
+        ts2 = AR1_process(**params, seed=2, return_xarray=False)
         
         assert not np.array_equal(ts1.data, ts2.data)
         assert ts1.data[0] == ts2.data[0]  # Initial value should be same
@@ -54,7 +54,7 @@ class TestAR1Process:
         y0 = 0.0
         N = 10000  # Large N for statistical accuracy
         
-        ts = AR1_process(rho, sigma, y0, N, seed=42)
+        ts = AR1_process(rho, sigma, y0, N, seed=42, return_xarray=False)
         
         # Theoretical variance for large N
         theoretical_var = sigma**2 / (1 - rho**2)
@@ -73,48 +73,48 @@ class TestAR1Process:
         
         # Test rho validation
         with pytest.raises(ValueError, match="rho must be in \\(-1, 1\\)"):
-            AR1_process(rho=1.0, **base_params)
-        
+            AR1_process(rho=1.0, **base_params, return_xarray=False)
+
         with pytest.raises(ValueError, match="rho must be in \\(-1, 1\\)"):
-            AR1_process(rho=-1.0, **base_params)
-        
+            AR1_process(rho=-1.0, **base_params, return_xarray=False)
+
         with pytest.raises(ValueError, match="rho must be in \\(-1, 1\\)"):
-            AR1_process(rho=1.5, **base_params)
-        
+            AR1_process(rho=1.5, **base_params, return_xarray=False)
+
         # Test sigma validation
         with pytest.raises(ValueError, match="sigma must be positive"):
-            AR1_process(rho=0.5, sigma=0.0, **{k: v for k, v in base_params.items() if k != 'sigma'})
-        
+            AR1_process(rho=0.5, sigma=0.0, return_xarray=False, **{k: v for k, v in base_params.items() if k != 'sigma'})
+
         with pytest.raises(ValueError, match="sigma must be positive"):
-            AR1_process(rho=0.5, sigma=-1.0, **{k: v for k, v in base_params.items() if k != 'sigma'})
-        
+            AR1_process(rho=0.5, sigma=-1.0, return_xarray=False, **{k: v for k, v in base_params.items() if k != 'sigma'})
+
         # Test N validation
         with pytest.raises(ValueError, match="N must be positive"):
-            AR1_process(rho=0.5, N=0, **{k: v for k, v in base_params.items() if k != 'N'})
-        
+            AR1_process(rho=0.5, N=0, return_xarray=False, **{k: v for k, v in base_params.items() if k != 'N'})
+
         with pytest.raises(ValueError, match="N must be positive"):
-            AR1_process(rho=0.5, N=-5, **{k: v for k, v in base_params.items() if k != 'N'})
-        
+            AR1_process(rho=0.5, N=-5, return_xarray=False, **{k: v for k, v in base_params.items() if k != 'N'})
+
         # Test dt validation
         with pytest.raises(ValueError, match="dt must be positive"):
-            AR1_process(rho=0.5, dt=0.0, **{k: v for k, v in base_params.items() if k != 'dt'})
+            AR1_process(rho=0.5, dt=0.0, return_xarray=False, **{k: v for k, v in base_params.items() if k != 'dt'})
     
     def test_edge_cases(self):
         """Test edge cases and boundary conditions."""
         # Very small rho (close to white noise)
-        ts_small_rho = AR1_process(rho=0.01, sigma=1.0, y0=0.0, N=100, seed=42)
+        ts_small_rho = AR1_process(rho=0.01, sigma=1.0, y0=0.0, N=100, seed=42, return_xarray=False)
         assert len(ts_small_rho.data) == 100
-        
+
         # rho close to 1 (highly persistent)
-        ts_high_rho = AR1_process(rho=0.99, sigma=1.0, y0=1.0, N=50, seed=42)
+        ts_high_rho = AR1_process(rho=0.99, sigma=1.0, y0=1.0, N=50, seed=42, return_xarray=False)
         assert len(ts_high_rho.data) == 50
-        
+
         # Very small sigma
-        ts_small_sigma = AR1_process(rho=0.5, sigma=1e-6, y0=1.0, N=50, seed=42)
+        ts_small_sigma = AR1_process(rho=0.5, sigma=1e-6, y0=1.0, N=50, seed=42, return_xarray=False)
         assert len(ts_small_sigma.data) == 50
-        
+
         # Single point
-        ts_single = AR1_process(rho=0.5, sigma=1.0, y0=2.5, N=1)
+        ts_single = AR1_process(rho=0.5, sigma=1.0, y0=2.5, N=1, return_xarray=False)
         assert ts_single.n == 1
         assert ts_single.data[0] == 2.5
     
@@ -123,7 +123,7 @@ class TestAR1Process:
         N = 50
         dt = 0.25
         
-        ts = AR1_process(rho=0.6, sigma=1.0, y0=0.0, N=N, dt=dt)
+        ts = AR1_process(rho=0.6, sigma=1.0, y0=0.0, N=N, dt=dt, return_xarray=False)
         
         assert len(ts.time) == N
         assert ts.time[0] == 0.0
@@ -135,7 +135,7 @@ class TestAR1Process:
         params = {'rho': 0.7, 'sigma': 1.0, 'y0': 0.0, 'N': 50, 'dt': 1.0}
         
         # Generate multiple series without seed
-        series = [AR1_process(**params) for _ in range(5)]
+        series = [AR1_process(**params, return_xarray=False) for _ in range(5)]
         
         # Check that not all series are identical
         data_arrays = [ts.data for ts in series]

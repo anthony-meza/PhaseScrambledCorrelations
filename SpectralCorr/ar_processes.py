@@ -11,19 +11,20 @@ import numpy as np
 from .timeseries import TimeSeries
 
 def AR1_process(
-    rho: float, 
-    sigma: float, 
-    y0: float, 
-    N: int, 
-    seed: Optional[int] = None, 
-    dt: float = 1.0
-) -> TimeSeries:
+    rho: float,
+    sigma: float,
+    y0: float,
+    N: int,
+    seed: Optional[int] = None,
+    dt: float = 1.0,
+    return_xarray: bool = True
+):
     """
     Simulate a first-order autoregressive AR(1) process.
-    
+
     Generates a time series following the equation:
     y[t] = rho * y[t-1] + eps[t]
-    
+
     where eps[t] ~ N(0, sigma²) is white Gaussian noise.
 
     Parameters
@@ -43,12 +44,13 @@ def AR1_process(
         current random state.
     dt : float, optional, default=1.0
         Time step between consecutive samples.
+    return_xarray : bool, optional, default=True
+        If True, return xarray.DataArray. If False, return TimeSeries object.
 
     Returns
     -------
-    TimeSeries
-        Simulated AR(1) time series object containing time array,
-        data values, and metadata.
+    xarray.DataArray or TimeSeries
+        Simulated AR(1) time series. Default is xarray.DataArray with time coordinate.
         
     Raises
     ------
@@ -100,5 +102,12 @@ def AR1_process(
     
     # Create time array
     time = np.arange(N) * dt
-    
-    return TimeSeries(time, data, dt)
+
+    # Create TimeSeries object for internal representation
+    ts = TimeSeries(time, data, dt)
+
+    # Return format based on user preference
+    if return_xarray:
+        return ts.to_xarray()
+    else:
+        return ts

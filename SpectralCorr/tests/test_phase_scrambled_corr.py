@@ -1,5 +1,5 @@
 import numpy as np
-from PhaseScrambledCorrelations.ar_processes import AR1_process
+from SpectralCorr.ar_processes import AR1_process
 import pytest
 
 
@@ -12,8 +12,8 @@ def test_AR1_simulate_length_and_reproducibility():
     y0 = 1
 
     # run twice with the same seed
-    ts1 = AR1_process(rho, noise_std, y0, N, seed=42, dt = dt)
-    ts2 = AR1_process(rho, noise_std, y0, N, seed=42, dt = dt)
+    ts1 = AR1_process(rho, noise_std, y0, N, seed=42, dt=dt, return_xarray=False)
+    ts2 = AR1_process(rho, noise_std, y0, N, seed=42, dt=dt, return_xarray=False)
 
     # 1) length checks
     assert ts1.n == N

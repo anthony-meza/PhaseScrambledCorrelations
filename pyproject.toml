@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "PhaseScrambledCorrelations"
+name = "SpectralCorr"
 version = "0.1.0"
 description = "Phase randomization surrogates for cross-correlation significance testing in time series analysis"
 authors = ["Anthony Meza <ameza@mit.edu>"]
@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Mathematics",
     "Topic :: Scientific/Engineering :: Physics",
 ]
-packages = [{include = "PhaseScrambledCorrelations"}]
+packages = [{include = "SpectralCorr"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -62,8 +62,8 @@ profile = "black"
 line_length = 88
 
 [tool.pytest.ini_options]
-testpaths = ["PhaseScrambledCorrelations/tests"]
-addopts = "--cov=PhaseScrambledCorrelations --cov-report=term-missing --cov-report=html"
+testpaths = ["SpectralCorr/tests"]
+addopts = "--cov=SpectralCorr --cov-report=term-missing --cov-report=html"
 
 [tool.mypy]
 python_version = "3.11"
@@ -73,7 +73,7 @@ disallow_untyped_defs = true
 check_untyped_defs = true
 
 [tool.coverage.run]
-source = ["PhaseScrambledCorrelations"]
+source = ["SpectralCorr"]
 
 [tool.coverage.report]
 exclude_lines = [
