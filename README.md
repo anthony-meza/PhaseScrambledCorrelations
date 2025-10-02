@@ -1,6 +1,7 @@
 # SpectralCorr
 
-Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations. 
+Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to non-lagged and lagged correlations. 
+
 
 ## Installation
 
@@ -26,4 +27,4 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## References 
 
-Ebisuzaki, W. (1997). A method to estimate the statistical significance of a correlation when the data are serially correlated. Journal of Climate, 10(9), 2147–2153.
+[Ebisuzaki, W. (1997). A method to estimate the statistical significance of a correlation when the data are serially correlated. Journal of Climate, 10(9), 2147–2153. https://doi.org/10.1175/1520-0442(1997)010&#60;2147:amtets&#62;2.0.co;2](https://doi.org/10.1175/1520-0442(1997)010%3C2147:AMTETS%3E2.0.CO;2)
