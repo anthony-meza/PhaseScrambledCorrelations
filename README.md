@@ -6,7 +6,7 @@ Power-spectrum based significance testing for autocorrelated time series. This P
 ## Installation
 
 ```bash
-$ pip install git+https://github.com/anthonymeza/phase_scrambled_corr.git@main
+$ pip install git+https://github.com/anthonymeza/SpectralCorr.git@main
 ```
 
 ## Usage
