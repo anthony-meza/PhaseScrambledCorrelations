@@ -1,6 +1,8 @@
 # SpectralCorr
 
-Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations. 
+<img width="989" height="396" alt="output" src="https://github.com/user-attachments/assets/e27730ac-2e9d-4d30-b918-cc7c63e14d92" />
+
+Power-spectrum based correlation significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations. 
 
 
 ## Installation
@@ -35,10 +37,10 @@ from SpectralCorr import AR1_process, cross_correlation
 ts1 = AR1_process(rho=0.9, sigma=1.0, y0=0.0, N=500, seed=42)
 ts2 = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=500, seed=123)
 
-# Compute cross-correlation with Pearson method (fast, assumes Gaussian)
+# Compute cross-correlation with Pearson method (no autocorrelation in timeseries)
 result_pearson = cross_correlation(ts1, ts2, maxlags=50, method='pearson')
 
-# Or use the Ebisuzaki method for robust significance testing
+# Or use the Ebisuzaki method for robust significance testing for autocorrelated timeseries 
 result_ebisuzaki = cross_correlation(ts1, ts2, maxlags=50, method='ebisuzaki', n_iter=1000)
 
 # Results are returned as xarray Datasets
