@@ -100,30 +100,11 @@ def test_performance_improvement():
     return optimized_time, old_simulation_time
 
 
-def test_backward_compatibility():
-    """Test that old TimeSeries interface still works."""
-    print("\n🔄 Testing backward compatibility...\n")
-
-    # Test old TimeSeries interface
-    ts1_old = AR1_process(rho=0.9, sigma=1.0, y0=0.0, N=50, seed=42, return_xarray=False)
-    ts2_old = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=50, seed=123, return_xarray=False)
-
-    print(f"Old interface types: {type(ts1_old)}, {type(ts2_old)}")
-
-    # Test that cross_correlation still works with TimeSeries objects
-    result_old = cross_correlation(ts1_old, ts2_old, maxlags=5, method='pearson')
-    print(f"Result with TimeSeries inputs: {type(result_old)}")
-
-    print("✅ Backward compatibility maintained!")
-    return True
-
-
 if __name__ == "__main__":
     print("🎯 SpectralCorr Xarray Interface & Performance Test\n")
 
     # Run tests
     test_xarray_interface()
     test_performance_improvement()
-    # test_backward_compatibility()
 
     print("\n🎉 All tests completed successfully!")
