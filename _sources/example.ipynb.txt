@@ -3,15 +3,11 @@
   {
    "cell_type": "markdown",
    "metadata": {},
-   "source": [
-    "# Example usage\n",
-    "\n",
-    "To use `PhaseScrambledCorrelations` in a project:"
-   ]
+   "source": "# Example usage\n\nTo use `SpectralCorr` in a project:"
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": null,
    "metadata": {
     "execution": {
      "iopub.execute_input": "2025-08-28T20:55:12.213435Z",
@@ -20,20 +16,8 @@
      "shell.execute_reply": "2025-08-28T20:55:13.108264Z"
     }
    },
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "0.1.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "import PhaseScrambledCorrelations\n",
-    "\n",
-    "print(PhaseScrambledCorrelations.__version__)"
-   ]
+   "outputs": [],
+   "source": "import SpectralCorr\nimport numpy as np\n\n# Print version\nprint(f\"SpectralCorr version: {SpectralCorr.__version__}\")\n\n# Example usage of the main functionality\n# Generate two AR(1) time series\nts1 = SpectralCorr.AR1_process(rho=0.9, sigma=1.0, y0=0.0, N=100, seed=42)\nts2 = SpectralCorr.AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=100, seed=123)\n\n# Cross-correlation using Pearson method (fast)\nccf_pearson = SpectralCorr.cross_correlation(ts1, ts2, maxlags=20, method='pearson')\nprint(f\"Pearson method: {len(ccf_pearson.lag)} lags computed\")\n\n# Cross-correlation using Ebisuzaki method (robust)\nccf_ebisuzaki = SpectralCorr.cross_correlation(ts1, ts2, maxlags=20, method='ebisuzaki', n_iter=100)\nprint(f\"Ebisuzaki method: {len(ccf_ebisuzaki.lag)} lags computed\")"
   }
  ],
  "metadata": {

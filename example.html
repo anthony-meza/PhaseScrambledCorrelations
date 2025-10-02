@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example usage &mdash; PhaseScrambledCorrelations  documentation</title>
+  <title>Example usage &mdash; SpectralCorr  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="&lt;no title&gt;" href="changelog.html" />
-    <link rel="prev" title="PhaseScrambledCorrelations" href="index.html" /> 
+    <link rel="prev" title="SpectralCorr" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            PhaseScrambledCorrelations
+            SpectralCorr
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -53,7 +53,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">PhaseScrambledCorrelations</a>
+          <a href="index.html">SpectralCorr</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -73,17 +73,51 @@
              
   <section id="example-usage">
 <h1>Example usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h1>
-<p>To use <code class="docutils literal notranslate"><span class="pre">PhaseScrambledCorrelations</span></code> in a project:</p>
+<p>To use <code class="docutils literal notranslate"><span class="pre">SpectralCorr</span></code> in a project:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">PhaseScrambledCorrelations</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">SpectralCorr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">PhaseScrambledCorrelations</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="c1"># Print version</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SpectralCorr version: </span><span class="si">{</span><span class="n">SpectralCorr</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example usage of the main functionality</span>
+<span class="c1"># Generate two AR(1) time series</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">SpectralCorr</span><span class="o">.</span><span class="n">AR1_process</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">SpectralCorr</span><span class="o">.</span><span class="n">AR1_process</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Cross-correlation using Pearson method (fast)</span>
+<span class="n">ccf_pearson</span> <span class="o">=</span> <span class="n">SpectralCorr</span><span class="o">.</span><span class="n">cross_correlation</span><span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pearson method: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ccf_pearson</span><span class="o">.</span><span class="n">lag</span><span class="p">)</span><span class="si">}</span><span class="s2"> lags computed&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cross-correlation using Ebisuzaki method (robust)</span>
+<span class="n">ccf_ebisuzaki</span> <span class="o">=</span> <span class="n">SpectralCorr</span><span class="o">.</span><span class="n">cross_correlation</span><span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ebisuzaki&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ebisuzaki method: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ccf_ebisuzaki</span><span class="o">.</span><span class="n">lag</span><span class="p">)</span><span class="si">}</span><span class="s2"> lags computed&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SpectralCorr version: 0.1.0
+Pearson method: 41 lags computed
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing cross-correlation:   0%|          | 0/41 [00:00&lt;?, ?it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing cross-correlation:  41%|████▏     | 17/41 [00:00&lt;00:00, 164.28it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing cross-correlation:  83%|████████▎ | 34/41 [00:00&lt;00:00, 162.85it/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing cross-correlation: 100%|██████████| 41/41 [00:00&lt;00:00, 162.40it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ebisuzaki method: 41 lags computed
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -94,7 +128,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="PhaseScrambledCorrelations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="SpectralCorr" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="changelog.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

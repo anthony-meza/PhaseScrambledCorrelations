@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PhaseScrambledCorrelations &mdash; PhaseScrambledCorrelations  documentation</title>
+  <title>SpectralCorr &mdash; SpectralCorr  documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -32,7 +32,7 @@
           
           
           <a href="#" class="icon icon-home">
-            PhaseScrambledCorrelations
+            SpectralCorr
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -52,7 +52,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PhaseScrambledCorrelations</a>
+          <a href="#">SpectralCorr</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -60,7 +60,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">PhaseScrambledCorrelations</li>
+      <li class="breadcrumb-item active">SpectralCorr</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -70,20 +70,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="phasescrambledcorrelations">
-<h1>PhaseScrambledCorrelations<a class="headerlink" href="#phasescrambledcorrelations" title="Link to this heading"></a></h1>
-<p>This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The correlation test is applied here both to instantaneous and lagged correlations.</p>
+  <section id="spectralcorr">
+<h1>SpectralCorr<a class="headerlink" href="#spectralcorr" title="Link to this heading"></a></h1>
+<p>Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/anthonymeza/phase_scrambled_corr.git@main
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/anthonymeza/SpectralCorr.git@main
 </pre></div>
 </div>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
+<p>Here’s a quick example to get you started:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">SpectralCorr</span><span class="w"> </span><span class="kn">import</span> <span class="n">AR1_process</span><span class="p">,</span> <span class="n">cross_correlation</span>
+
+<span class="c1"># Generate two AR(1) time series</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">AR1_process</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">AR1_process</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Compute cross-correlation with Pearson method (fast, assumes Gaussian)</span>
+<span class="n">result_pearson</span> <span class="o">=</span> <span class="n">cross_correlation</span><span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pearson&#39;</span><span class="p">)</span>
+
+<span class="c1"># Or use the Ebisuzaki method for robust significance testing</span>
+<span class="n">result_ebisuzaki</span> <span class="o">=</span> <span class="n">cross_correlation</span><span class="p">(</span><span class="n">ts1</span><span class="p">,</span> <span class="n">ts2</span><span class="p">,</span> <span class="n">maxlags</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;ebisuzaki&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Results are returned as xarray Datasets</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_ebisuzaki</span><span class="o">.</span><span class="n">cross_correlation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_ebisuzaki</span><span class="o">.</span><span class="n">cross_correlation_pvalue</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more examples, see the Jupyter notebooks in the <code class="docutils literal notranslate"><span class="pre">notebook_examples/</span></code> directory.</p>
 </section>
 <section id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading"></a></h2>
@@ -91,15 +108,15 @@
 </section>
 <section id="license">
 <h2>License<a class="headerlink" href="#license" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">PhaseScrambledCorrelations</span></code> was created by Anthony Meza. It is licensed under the terms of the MIT license.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SpectralCorr</span></code> was created by Anthony Meza. It is licensed under the terms of the MIT license.</p>
 </section>
 <section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">PhaseScrambledCorrelations</span></code> was created with <a class="reference external" href="https://cookiecutter.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code></a> and the <code class="docutils literal notranslate"><span class="pre">py-pkgs-cookiecutter</span></code> <a class="reference external" href="https://github.com/py-pkgs/py-pkgs-cookiecutter">template</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SpectralCorr</span></code> was created with <a class="reference external" href="https://cookiecutter.readthedocs.io/en/latest/"><code class="docutils literal notranslate"><span class="pre">cookiecutter</span></code></a> and the <code class="docutils literal notranslate"><span class="pre">py-pkgs-cookiecutter</span></code> <a class="reference external" href="https://github.com/py-pkgs/py-pkgs-cookiecutter">template</a>.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
-<p>Ebisuzaki, W. (1997). A method to estimate the statistical significance of a correlation when the data are serially correlated. Journal of Climate, 10(9), 2147–2153.</p>
+<p><a class="reference external" href="https://doi.org/10.1175/1520-0442(1997)010%3C2147:AMTETS%3E2.0.CO;2">Ebisuzaki, W. (1997). A method to estimate the statistical significance of a correlation when the data are serially correlated. Journal of Climate, 10(9), 2147–2153. https://doi.org/10.1175/1520-0442(1997)010&lt;2147:amtets&gt;2.0.co;2</a></p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
