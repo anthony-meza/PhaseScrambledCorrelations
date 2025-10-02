@@ -2,7 +2,7 @@
 
 <img width="989" height="396" alt="output" src="https://github.com/user-attachments/assets/e27730ac-2e9d-4d30-b918-cc7c63e14d92" />
 
-Power-spectrum based significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations. 
+Power-spectrum based correlation significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations. 
 
 
 ## Installation
