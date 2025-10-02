@@ -11,7 +11,28 @@ $ pip install git+https://github.com/anthonymeza/SpectralCorr.git@main
 
 ## Usage
 
-- TODO
+Here's a quick example to get you started:
+
+```python
+import numpy as np
+from SpectralCorr import AR1_process, cross_correlation
+
+# Generate two AR(1) time series
+ts1 = AR1_process(rho=0.9, sigma=1.0, y0=0.0, N=500, seed=42)
+ts2 = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=500, seed=123)
+
+# Compute cross-correlation with Pearson method (fast, assumes Gaussian)
+result_pearson = cross_correlation(ts1, ts2, maxlags=50, method='pearson')
+
+# Or use the Ebisuzaki method for robust significance testing
+result_ebisuzaki = cross_correlation(ts1, ts2, maxlags=50, method='ebisuzaki', n_iter=1000)
+
+# Results are returned as xarray Datasets
+print(result_ebisuzaki.cross_correlation)
+print(result_ebisuzaki.cross_correlation_pvalue)
+```
+
+For more examples, see the Jupyter notebooks in the `notebook_examples/` directory.
 
 ## Contributing
 

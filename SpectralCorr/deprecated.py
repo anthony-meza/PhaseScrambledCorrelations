@@ -151,12 +151,19 @@ def bootstrapped_cross_correlation(ts1, ts2, maxlags=None, n_iter=1000,
     else:
         ts2_xr = ts2
 
+    # Note: seed parameter is ignored as the new cross_correlation doesn't support it
+    if seed is not None:
+        warnings.warn(
+            "The 'seed' parameter is not supported in cross_correlation and will be ignored.",
+            UserWarning,
+            stacklevel=2
+        )
+
     return cross_correlation(
         ts1_xr, ts2_xr,
         maxlags=maxlags,
         method='ebisuzaki',
         n_iter=n_iter,
         return_distributions=return_distributions,
-        detrend=detrend,
-        seed=seed
+        detrend=detrend
     )

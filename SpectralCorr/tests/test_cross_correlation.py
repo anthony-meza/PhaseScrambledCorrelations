@@ -78,14 +78,23 @@ class TestCrossCorrelation:
 
     def test_time_series_validation(self):
         """Test validation of input time series."""
-        # Different dt values
-        ts_bad_dt = TimeSeries(self.ts2.time, self.ts2.data, dt=2.0)
-        with pytest.raises(ValueError, match="TimeSeries dt mismatch"):
+        import xarray as xr
+        # Different dt values (non-aligned time coordinates)
+        ts_bad_dt = xr.DataArray(
+            self.ts2.values,
+            coords={'time': np.arange(len(self.ts2)) * 2.0},  # Different dt
+            dims=['time']
+        )
+        with pytest.raises(ValueError, match="Time coordinates must be aligned"):
             cross_correlation(self.ts1, ts_bad_dt)
 
         # Different lengths
-        ts_bad_length = TimeSeries(self.ts2.time[:-5], self.ts2.data[:-5], dt=self.dt)
-        with pytest.raises(ValueError, match="TimeSeries length mismatch"):
+        ts_bad_length = xr.DataArray(
+            self.ts2.values[:-5],
+            coords={'time': self.ts2.coords['time'].values[:-5]},
+            dims=['time']
+        )
+        with pytest.raises(ValueError, match="Time series must have same length"):
             cross_correlation(self.ts1, ts_bad_length)
 
     def test_maxlags_handling(self):
@@ -133,14 +142,23 @@ class TestMaximumCrossCorrelation:
 
     def setup_method(self):
         """Set up test fixtures."""
+        import xarray as xr
         self.N = 50
         self.dt = 1.0
         self.maxlags = 10
 
         # Create test time series - one lagged version of the other
         base_ts = AR1_process(0.9, 1.0, 0.0, self.N + 5, seed=42, dt=self.dt)
-        self.ts1 = TimeSeries(base_ts.time[:self.N], base_ts.data[:self.N], self.dt)
-        self.ts2 = TimeSeries(base_ts.time[:self.N], base_ts.data[3:self.N+3], self.dt)  # 3-step lag
+        self.ts1 = xr.DataArray(
+            base_ts.values[:self.N],
+            coords={'time': base_ts.coords['time'].values[:self.N]},
+            dims=['time']
+        )
+        self.ts2 = xr.DataArray(
+            base_ts.values[3:self.N+3],
+            coords={'time': base_ts.coords['time'].values[:self.N]},
+            dims=['time']
+        )  # 3-step lag
 
     def test_maxima_detection(self):
         """Test that maxima detection works correctly."""
@@ -173,11 +191,8 @@ class TestMaximumCrossCorrelation:
 
     def test_xarray_inputs(self):
         """Test maximum_cross_correlation with xarray inputs."""
-        # Convert to xarray
-        ts1_xr = self.ts1.to_xarray()
-        ts2_xr = self.ts2.to_xarray()
-
-        lag_max, ccf_max = maximum_cross_correlation(ts1_xr, ts2_xr, maxlags=self.maxlags)
+        # Already using xarray inputs from setup_method
+        lag_max, ccf_max = maximum_cross_correlation(self.ts1, self.ts2, maxlags=self.maxlags)
 
         assert isinstance(lag_max, (int, float, np.number))
         assert isinstance(ccf_max, (float, np.number))
@@ -189,8 +204,8 @@ class TestDeprecatedCrossCorrelationMaxima:
 
     def test_deprecated_function_warning(self):
         """Test that deprecated function gives warning but still works."""
-        ts1 = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=50, seed=42, return_xarray=False)
-        ts2 = AR1_process(rho=0.7, sigma=1.0, y0=0.0, N=50, seed=123, return_xarray=False)
+        ts1 = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=50, seed=42)
+        ts2 = AR1_process(rho=0.7, sigma=1.0, y0=0.0, N=50, seed=123)
 
         with warnings.catch_warnings(record=True) as w:
             warnings.simplefilter("always")

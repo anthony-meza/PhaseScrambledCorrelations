@@ -139,8 +139,8 @@ class TestCorrelation:
 
     def test_correlation_methods_give_same_correlation(self):
         """Test that both methods give the same correlation coefficient."""
-        ts1 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=100, seed=42, return_xarray=False)
-        ts2 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=100, seed=123, return_xarray=False)
+        ts1 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=100, seed=42)
+        ts2 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=100, seed=123)
 
         corr_pearson, _ = correlation(ts1, ts2, method='pearson')
         corr_ebisuzaki, _ = correlation(ts1, ts2, method='ebisuzaki', n_iter=50)
@@ -150,8 +150,8 @@ class TestCorrelation:
 
     def test_correlation_returns_tuple(self):
         """Test that correlation always returns a tuple of two values."""
-        ts1 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=50, seed=42, return_xarray=False)
-        ts2 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=50, seed=123, return_xarray=False)
+        ts1 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=50, seed=42)
+        ts2 = AR1_process(rho=0.5, sigma=1.0, y0=0.0, N=50, seed=123)
 
         result = correlation(ts1, ts2, method='pearson')
         assert isinstance(result, tuple)
