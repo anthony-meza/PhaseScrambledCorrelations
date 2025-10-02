@@ -23,10 +23,10 @@ from SpectralCorr import AR1_process, cross_correlation
 ts1 = AR1_process(rho=0.9, sigma=1.0, y0=0.0, N=500, seed=42)
 ts2 = AR1_process(rho=0.8, sigma=1.0, y0=0.0, N=500, seed=123)
 
-# Compute cross-correlation with Pearson method (fast, assumes Gaussian)
+# Compute cross-correlation with Pearson method (no autocorrelation in timeseries)
 result_pearson = cross_correlation(ts1, ts2, maxlags=50, method='pearson')
 
-# Or use the Ebisuzaki method for robust significance testing
+# Or use the Ebisuzaki method for robust significance testing for autocorrelated timeseries 
 result_ebisuzaki = cross_correlation(ts1, ts2, maxlags=50, method='ebisuzaki', n_iter=1000)
 
 # Results are returned as xarray Datasets
