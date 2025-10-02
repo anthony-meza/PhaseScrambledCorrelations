@@ -76,7 +76,18 @@
 <p>Power-spectrum based correlation significance testing for autocorrelated time series. This Python package implements a non-parametric correlation test that utilizes randomly generated time series with the appropriate power spectra (Ebisuzaki, 1997). The Ebisuzaki correlation test can be applied here to test both lagged and non-lagged correlations.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/anthonymeza/SpectralCorr.git@main
+<p>We recommend installing SpectralCorr in a virtual environment to avoid dependency conflicts:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and activate a virtual environment</span>
+$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>spectralcorr_env
+$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>spectralcorr_env/bin/activate<span class="w">  </span><span class="c1"># On macOS/Linux</span>
+$<span class="w"> </span>spectralcorr_env<span class="se">\S</span>cripts<span class="se">\a</span>ctivate<span class="w">     </span><span class="c1"># On Windows</span>
+
+<span class="c1"># Install SpectralCorr</span>
+$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/anthony-meza/SpectralCorr.git@main
+</pre></div>
+</div>
+<p>Alternatively, you can install directly without a virtual environment (though this may cause dependency conflicts with other packages):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/anthony-meza/SpectralCorr.git@main
 </pre></div>
 </div>
 </section>
