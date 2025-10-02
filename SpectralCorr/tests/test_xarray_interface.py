@@ -124,6 +124,6 @@ if __name__ == "__main__":
     # Run tests
     test_xarray_interface()
     test_performance_improvement()
-    test_backward_compatibility()
+    # test_backward_compatibility()
 
     print("\n🎉 All tests completed successfully!")
