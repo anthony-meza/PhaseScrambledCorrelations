@@ -5,8 +5,22 @@ Power-spectrum based significance testing for autocorrelated time series. This P
 
 ## Installation
 
+We recommend installing SpectralCorr in a virtual environment to avoid dependency conflicts:
+
 ```bash
-$ pip install git+https://github.com/anthonymeza/SpectralCorr.git@main
+# Create and activate a virtual environment
+$ python -m venv spectralcorr_env
+$ source spectralcorr_env/bin/activate  # On macOS/Linux
+$ spectralcorr_env\Scripts\activate     # On Windows
+
+# Install SpectralCorr
+$ pip install git+https://github.com/anthony-meza/SpectralCorr.git@main
+```
+
+Alternatively, you can install directly without a virtual environment (though this may cause dependency conflicts with other packages):
+
+```bash
+$ pip install git+https://github.com/anthony-meza/SpectralCorr.git@main
 ```
 
 ## Usage
