@@ -26,12 +26,12 @@ packages = [{include = "SpectralCorr"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-numpy = "^1.24.0"
+numpy = ">=1.24.0,<3.0.0"
 scipy = "^1.10.0"
 matplotlib = "^3.6.0"
 statsmodels = "^0.14.0"
 pandas = "^2.0.0"
-xarray = "^2023.1.0"
+xarray = ">=2023.1.0"
 tqdm = "^4.65.0"
 
 [tool.poetry.group.dev.dependencies]
