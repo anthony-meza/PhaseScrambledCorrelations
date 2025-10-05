@@ -14,7 +14,7 @@ from tqdm import trange
 
 
 def cross_correlation(ts1, ts2, maxlags=None, method='pearson',
-                     n_iter=1000, return_distributions=False, detrend=True):
+                     n_iter=5000, return_distributions=False, detrend=True):
     """
     Compute cross-correlation and p-values between two time series.
 

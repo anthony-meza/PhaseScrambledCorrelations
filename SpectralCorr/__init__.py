@@ -24,6 +24,12 @@ from .ar_processes import *
 from .correlations import *
 from .fft_utils import *
 from .timeseries import TimeSeries
+from .plotting import (
+    plot_significant_correlations,
+    plot_conf_intervals,
+    plot_cross_correlation
+)
+
 # Deprecated functions for backward compatibility
 from .deprecated import cross_correlation_maxima, shift_maximally_correlated, bootstrapped_cross_correlation
 
@@ -48,4 +54,8 @@ __all__ = [
     # FFT utilities
     "real_fft",
     "simple_detrend",
+    # Plotting
+    "plot_significant_correlations",
+    "plot_conf_intervals",
+    "plot_cross_correlation",
 ]
